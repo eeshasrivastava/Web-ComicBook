@@ -1,0 +1,467 @@
+ 
+<html>
+ 
+<head>
+    <title>Comic Book</title>
+         
+	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="booklet/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="booklet/jquery.booklet.1.1.0.min.js" type="text/javascript"></script>
+	<link href="booklet/jquery.booklet.1.1.0.css" type="text/css" rel="stylesheet" media="screen" />
+			
+		 
+<style>
+         
+              *{
+	margin:0;
+	padding:0;
+}
+body{
+	background:#e29c22;	
+	color:rgb(45, 12, 88);
+	font-size:12px;
+	color: #333;
+    font-family: 'Oswald', sans-serif;
+	margin: 20px;
+}
+ 
+.booklet           {
+	width:900px;
+	height:637px;
+	position:relative;
+	margin:0 auto 10px;
+	-moz-box-shadow:0px 0px 1px #fff;
+	-webkit-box-shadow:0px 0px 1px #fff;
+	box-shadow:0px 0px 1px #fff;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+.booklet .b-wrap-left  {
+	background:#fff url(images/left_bg.jpg) no-repeat top left;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+.booklet .b-wrap-right {
+	background:#efefef url(images/right_bg.jpg) no-repeat top left;
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.booklet .b-counter {
+	bottom:10px;
+	position:absolute;
+	display:block;
+	width:90%;
+	height:20px;
+	border-top:1px solid #ddd;
+	color:#222;
+	text-align:center;
+	font-size:12px;
+	padding:5px 0 0;
+	background:transparent;
+	-moz-box-shadow:0px -1px 1px #fff;
+	-webkit-box-shadow:0px -1px 1px #fff;
+	box-shadow:0px -1px 1px #fff;
+	opacity:0.8;
+}
+.book_wrapper{
+	margin:0 auto;
+	padding-top:50px;
+	width:905px;
+	height:540px;
+	position:relative;
+	background:transparent url(images/bg.png) no-repeat 9px 27px;
+}
+.book_wrapper h1{
+	color:orange;
+	margin:5px 5px 5px 15px;
+	font-size:24px;
+	/* background:transparent url(images/h1.png) no-repeat bottom left; */
+	padding-bottom:7px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+.book_wrapper p{
+	font-size:15px;
+	margin:5px 5px 5px 15px;
+}
+.book_wrapper a.article,
+.book_wrapper a.demo{
+	background:transparent url(images/circle.png) no-repeat 50% 0px;
+	display:block;
+	width:95px;
+	height:41px;
+	text-decoration:none;
+	outline:none;
+	font-size:16px;
+	color:#555;
+	float:left;
+	line-height:41px;
+	padding-left:47px;
+}
+.book_wrapper a.demo{
+	margin-left:50px;
+}
+.book_wrapper a.article:hover,
+.book_wrapper a.demo:hover{
+	background-position:50% -41px;
+	color:#13386a;
+}
+.book_wrapper img{
+	margin:10px 0px 5px 35px;
+	width:300px;
+	padding:4px;
+	border:1px solid #ddd;
+	-moz-box-shadow:1px 1px 1px #fff;
+	-webkit-box-shadow:1px 1px 1px #fff;
+	box-shadow:1px 1px 1px #fff;
+}
+.booklet .b-wrap-right img{
+	border:1px solid #E6E3C2;
+}
+a#next_page_button,
+a#prev_page_button{
+	display:none;
+	position:absolute;
+	width:41px;
+	height:40px;
+	cursor:pointer;
+	margin-top:-20px;
+	top:50%;
+	background:transparent url(images/buttons.png) no-repeat 0px -40px;
+}
+a#prev_page_button{
+	left:-30px;
+}
+a#next_page_button{
+	right:-30px;
+	background-position:-41px -40px;
+}
+a#next_page_button:hover{
+	background-position:-41px 0px;
+}
+a#prev_page_button:hover{
+	background-position:0px 0px;
+}
+
+.panel {
+  background-color:#fff;
+  border:solid 2px #000;
+  box-shadow:0 6px 6px -6px #000;
+  display:inline-block;
+  flex:1 1;
+  height:200px;
+  margin:1vmin;
+  overflow:hidden;
+  position:relative;
+}   
+    
+.speech {
+  background-color:#fff;
+  border:solid 2px #000;
+  border-radius:12px;
+  display:inline-block;
+  margin:.5em;
+  padding:.5em 1em;
+  position:relative;
+}
+
+.speech:before {
+  border:solid 12px transparent;
+  border-left:solid 12px #000;
+  border-top:solid 12px #000;
+  bottom:-24px;
+  content:"";
+  height:0;
+  right:24px;
+  position:absolute;
+  transform:skew(10deg);
+  width:0;
+}
+
+.speech:after {
+  border:solid 10px transparent;
+  border-left:solid 10px #fff;
+  border-top:solid 10px #fff;
+  bottom:-19px;
+  content:"";
+  height:0;
+  right:27px;
+  position:absolute;
+  transform:skew(10deg);
+  width:0;
+}
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.img1{
+	width: 40px;
+	height: 150px;
+	margin-right: 50px;
+	background: none;
+	border: none;
+}
+.img2{
+	width: 30px;
+	height: 100px;
+	margin-right: 50px;
+	background: none;
+	border: none;
+}
+.img3{
+	width: 20px;
+	height: 120px;
+	margin-right: 50px;
+	background: none;
+	border: none;
+}
+
+.footerTitle{
+    color: white;
+  }
+  .white-text{
+    color: #fff;
+    cursor: pointer;
+  }
+  .middleColor{
+    background: #1C2331;
+  }
+  .copyrightColor{
+    background:rgba(0,0,0,0.2);;
+  }
+  .white{
+      color: white;
+      cursor: pointer;
+  }
+  footer{
+	position: fixed;left: 0;right: 0;width: 100%;height:70px;text-align: center;
+	margin-top: 60px;
+  }
+</style>
+		 
+</head>
+<body>
+    <br>
+		 
+		<div class="book_wrapper">
+			<a id="next_page_button"></a>
+			<a id="prev_page_button"></a>
+			 
+			<div id="mybook" style="display:none;">
+				<div class="b-load">
+					<div>
+						<img src="images/dist/react.jpg" alt=""/>
+						<h1>Tutorial Comic</h1>
+						<p>This is a Javascript Project which uses turn.js library for creating a Book Flip effect.<br/>
+							JavaScript is used in a fun and efficient way with the help of comic characters. 
+							<br/>
+							Click on ▶️ and ◀️ to move forward or backward 
+							 </p>
+					</div>
+					<div>
+						<div class="container">
+							<div class="row">
+								<div class="col-6">
+									<p class="speech page11"> Can you help me?</p>
+									<img class="img-fluid img1" src="images/dist/char1.png">
+								</div>
+								<div class="col-6">
+									<p class="speech page11">Sure thing.</p>
+									<img class="img-fluid img1" src="images/dist/char2.png">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<p class="speech page11">Touch here.</p>
+									<img class="img-fluid img1" src="images/dist/char3.png">
+								</div>
+								<div class="col-6">
+									<p class="speech page11">Hmm.. </p>
+									<img class="img-fluid img1" src="images/dist/char4.png">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="container">
+							<div class="row">
+								<div class="col-7">
+									<p class="speech page11">I am not happy with anything.</p>
+									<img class="img-fluid img2" src="images/dist/char1.png">
+								</div>
+								<div class="col-5">
+									<p class="speech page11">I see.</p>
+									<img class="img-fluid img1" src="images/dist/char2.png">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<p class="speech page11">What you two are discussing?</p>
+									<img class="img-fluid img1" src="images/dist/char5.png">
+								</div>
+								<div class="col-6">
+									<p class="speech page11">Just life.</p>
+									<img class="img-fluid img1" src="images/dist/char4.png">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="container">
+							<div class="row">
+								<div class="col-12">
+									<p class="speech page11">I am not able to sort things out in my life. Things are not going as I wished.</p>
+									<img class="img-fluid img3" src="images/dist/char1.png">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<p class="speech page11">Are you in stress?</p>
+									<img class="img-fluid img1" src="images/dist/char5.png">
+								</div>
+								<div class="col-6">
+									<p class="speech page11">You should avoid stress whatever the thing is.</p>
+									<img class="img-fluid img1" src="images/dist/char6.png">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="container">
+							<div class="row">
+								<div class="col-12">
+									<p class="speech page11">I have spent hours in my room. I lost all my friends, my family. I need someone to talk to. </p>
+									<img class="img-fluid img3" src="images/dist/char1.png">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<p class="speech page11">Better you have someone who can guide you.</p>
+									<img class="img-fluid img2" src="images/dist/char2.png">
+								</div>
+								<div class="col-6">
+									<p class="speech page11">Have you tried talking to counsellor?</p>
+									<img class="img-fluid img1" src="images/dist/char4.png">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="container">
+							<div class="row">
+								<div class="col-7">
+									<p class="speech page11">Things go wrong sometimes..its okay.</p>
+									<img class="img-fluid img1" src="images/dist/char5.png">
+								</div>
+								<div class="col-5">
+									<p class="speech page11">Exactly.</p>
+									<img class="img-fluid img1" src="images/dist/char6.png">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<p class="speech page11">But no one is too late to start.</p>
+									<img class="img-fluid img1" src="images/dist/char5.png">
+								</div>
+								<div class="col-6">
+									<p class="speech page11">I agree.</p>
+									<img class="img-fluid img1" src="images/dist/char2.png">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="container">
+							<div class="row">
+								<div class="col-6">
+									<p class="speech page11">Thank you for listening me.</p>
+									<img class="img-fluid img1" src="images/dist/char1.png">
+								</div>
+								<div class="col-6">
+									<p class="speech page11">Always remember, you are the creator</p>
+									<img class="img-fluid img1" src="images/dist/char2.png">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<p class="speech page11">of your own destiny.</p>
+									<img class="img-fluid img1" src="images/dist/char5.png">
+								</div>
+								<div class="col-6">
+									<p class="speech page11">BEST ADVICE ✨</p>
+									<img class="img-fluid img1" src="images/dist/char4.png">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<img src="images/14.jpg" alt="" />
+						<center><h1 style="margin-top: 50px;font-weight: bold;font-size: 52px;">End</h1></center>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+            <br>
+			<footer class="page-footer middleColor  font-small unique-color-dark" >
+			
+			  <div class="footer-copyright text-center py-3 copyrightColor white" style="font-size: 20px; padding-bottom: 10px;">
+				Made with ❤️ Eesha Srivastava
+			  </div>
+			
+			</footer>
+        
+        <script type="text/javascript">
+			$(function() {
+				var $mybook 		= $('#mybook');
+				var $bttn_next		= $('#next_page_button');
+				var $bttn_prev		= $('#prev_page_button');
+				var $loading		= $('#loading');
+				var $mybook_images	= $mybook.find('img');
+				var cnt_images		= $mybook_images.length;
+				var loaded			= 0;
+				 
+				$mybook_images.each(function(){
+					var $img 	= $(this);
+					var source	= $img.attr('src');
+					$('<img/>').load(function(){
+						++loaded;
+						if(loaded == cnt_images){
+							$loading.hide();
+							$bttn_next.show();
+							$bttn_prev.show();
+							$mybook.show().booklet({
+								name:               null,                            //  
+								width:              800,                             //  
+								height:             500,                             //   
+								speed:              600,                             //  
+								direction:          'LTR',                           //  
+								                           //  
+								next:               $bttn_next,          			//  
+								prev:               $bttn_prev,          			//  
+								                       
+							});
+							Cufon.refresh();
+						}
+					}).attr('src',source);
+				});
+				
+			});
+        </script>
+ 
+    </body>
+ 
+</html>
